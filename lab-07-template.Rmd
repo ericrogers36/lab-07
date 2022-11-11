@@ -35,7 +35,7 @@ evals %>%
 summarise(evals, av_score = mean(score), min_score = min(score), max_score = max(score))
 ```
 
-The distribution of scores is definitely left skewed - we can also note that the mean score is 4.17 (3 s.f.) which is quite high - suggesting that students are scoring the courses quite generously. In addition, the fact that the minimum score rating is 2.3 is further evidence for this/
+The distribution of scores is definitely left skewed - we can also note that the mean score is 4.17 (3 s.f.) which is quite high - suggesting that students are scoring the professors quite generously. In addition, the fact that the minimum score rating is 2.3 is further evidence for this. 
 
 ### Exercise 2
 
@@ -46,14 +46,18 @@ The distribution of scores is definitely left skewed - we can also note that the
 # this uses the patchwork package loaded above
 # learn more about patchwork at https://patchwork.data-imaginist.com/
 # it might be useful for your presentations!
-plot_geom_point  <- ggplot(___)
+plot_geom_point  <- ggplot(data=evals, aes(x=score, y=bty_avg)) +
+  geom_point() +
+  labs(x = "Score", y = "Average Beauty Rating of Professor")
 
-plot_geom_jitter <- ggplot(___)
+plot_geom_jitter <- ggplot(data=evals, aes(x=score, y=bty_avg)) +
+  geom_jitter() +
+  labs(x = "Score", y = "Average Beauty Rating of Professor")
 
 plot_geom_point + plot_geom_jitter
 ```
 
-*Add your narrative here.*
+Jitter is adding a slight amount of random variation to each point - allowing us to see areas with high point density - this is something we can not see on the original plot as points being plotted on top of others are not distinguishable.
 
 ### Exercise 3
 

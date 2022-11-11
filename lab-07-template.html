@@ -370,9 +370,9 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; }
 ## 1  4.17473       2.3         5</code></pre>
 <p>The distribution of scores is definitely left skewed - we can also
 note that the mean score is 4.17 (3 s.f.) which is quite high -
-suggesting that students are scoring the courses quite generously. In
+suggesting that students are scoring the professors quite generously. In
 addition, the fact that the minimum score rating is 2.3 is further
-evidence for this/</p>
+evidence for this.</p>
 </div>
 <div id="exercise-2" class="section level3">
 <h3>Exercise 2</h3>
@@ -382,12 +382,19 @@ evidence for this/</p>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># this uses the patchwork package loaded above</span></span>
 <span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a><span class="co"># learn more about patchwork at https://patchwork.data-imaginist.com/</span></span>
 <span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># it might be useful for your presentations!</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plot_geom_point  <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(___)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plot_geom_jitter <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(___)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>plot_geom_point  <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>evals, <span class="fu">aes</span>(<span class="at">x=</span>score, <span class="at">y=</span>bty_avg)) <span class="sc">+</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_point</span>() <span class="sc">+</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Score&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average Beauty Rating of Professor&quot;</span>)</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plot_geom_point <span class="sc">+</span> plot_geom_jitter</span></code></pre></div>
-<p><em>Add your narrative here.</em></p>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plot_geom_jitter <span class="ot">&lt;-</span> <span class="fu">ggplot</span>(<span class="at">data=</span>evals, <span class="fu">aes</span>(<span class="at">x=</span>score, <span class="at">y=</span>bty_avg)) <span class="sc">+</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_jitter</span>() <span class="sc">+</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;Score&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Average Beauty Rating of Professor&quot;</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a>plot_geom_point <span class="sc">+</span> plot_geom_jitter</span></code></pre></div>
+<p>Jitter is adding a slight amount of random variation to each point -
+allowing us to see areas with high point density - this is something we
+can not see on the original plot as points being plotted on top of
+others are not distinguishable.</p>
 </div>
 <div id="exercise-3" class="section level3">
 <h3>Exercise 3</h3>
