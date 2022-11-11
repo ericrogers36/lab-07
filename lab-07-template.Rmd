@@ -7,10 +7,9 @@ output:
     tufte_variant: "envisioned"
     highlight: pygments
 link-citations: yes
-
 ---
 
-### Load packages 
+### Load packages
 
 ```{r load-packages, message=FALSE}
 library(tidyverse)
@@ -24,7 +23,6 @@ library(patchwork)
 evals<-read.csv("data/evals.csv", row.names=1)
 ```
 
-
 ### Exercise 1
 
 ```{r viz-score}
@@ -35,7 +33,7 @@ evals %>%
 summarise(evals, av_score = mean(score), min_score = min(score), max_score = max(score))
 ```
 
-The distribution of scores is definitely left skewed - we can also note that the mean score is 4.17 (3 s.f.) which is quite high - suggesting that students are scoring the professors quite generously. In addition, the fact that the minimum score rating is 2.3 is further evidence for this. 
+The distribution of scores is definitely left skewed - we can also note that the mean score is 4.17 (3 s.f.) which is quite high - suggesting that students are scoring the professors quite generously. In addition, the fact that the minimum score rating is 2.3 is further evidence for this.
 
 ### Exercise 2
 
@@ -61,19 +59,19 @@ Jitter is adding a slight amount of random variation to each point - allowing us
 
 ### Exercise 3
 
-```{r fit-score_bty_fit}
+```{r fit-score_bty_fit, eval = FALSE}
 # remove eval = FALSE from the code chunk options after filling in the blanks
 score_bty_fit <- linear_reg() %>%
   set_engine("lm") %>%
-  fit(score ~ bty_avg, data = evals)
+  fit(___ ~ ___, data = ___)
 ```
 
-```{r tidy-score_bty_fit}
+```{r tidy-score_bty_fit, eval = FALSE}
 # remove eval = FALSE from the code chunk options after filling in the blanks
-tidy(score_bty_fit)
+tidy(___)
 ```
 
-score = 3.88 + 0.067xbty_avg
+*Add your linear model here. Don't worry too much about notation, you can use things like score-hat.*
 
 ### Exercise 4
 
@@ -112,38 +110,56 @@ ggplot(___)
 ### Exercise 9
 
 ```{r fit-score_rank_fit}
-# fit model
+score_rank_fit <- evals %>%
+  group_by(rank) %>%
+  mutate(avg_score = mean(score)) 
 
-# tidy model output
+score_rank_fit <- linear_reg() %>%
+  set_engine("glm") %>%
+  fit(avg_score ~ rank, data = score_rank_fit) %>%
+  tidy()
+
+score_rank_fit
+
 ```
 
-*Add your narrative here.*
+The intercept indicates that score for professors based on rank are expected to be 4.28, on average.
+The slope indicates that tenure track professor is expected to have higher score than tenured professor, on average
 
 ### Exercise 10
 
 ```{r fit-score_gender_fit}
-# fit model
+score_gender_fit <- evals%>%
+  group_by(gender) %>%
+  mutate(avg_score = mean(score)) 
 
-# tidy model output
+score_gender_fit <- linear_reg() %>%
+  set_engine("glm") %>%
+  fit(avg_score ~ gender, data = score_gender_fit) %>%
+  tidy()
+score_gender_fit
 ```
 
-```{r score_gender_intercept, echo = FALSE, eval = FALSE}
+```{r score_gender_intercept, echo = FALSE}
 # remove eval = FALSE from the code chunk options
-score_gender_intercept <- tidy(score_gender_fit) %>% 
+score_gender_intercept <- score_gender_fit %>% 
   filter(term == "(Intercept)") %>%
   select(estimate) %>%
   pull()
+score_gender_intercept
 ```
 
-```{r score_gender_slope, echo = FALSE, eval = FALSE}
+```{r score_gender_slope, echo = FALSE}
 # remove eval = FALSE from the code chunk options after filling in the blanks
-score_gender_slope <- tidy(score_gender_fit) %>% 
-  filter(term == "___") %>%
-  select(___) %>%
+score_gender_slope <-score_gender_fit %>% 
+  filter(term == "gendermale") %>%
+  select(estimate) %>%
   pull()
+round(score_gender_slope, 10)
 ```
 
-*Add your narrative here.*
+The intercept shows that score for female professors are expected to be 4.18, on average. 
+The slope shows that male professors are expected to have higher score than female, on average.
 
 ### Exercise 11
 
