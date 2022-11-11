@@ -29,9 +29,13 @@ evals<-read.csv("data/evals.csv", row.names=1)
 
 ```{r viz-score}
 # add code here
+evals %>%
+  ggplot(aes(x=score)) +
+  geom_histogram(binwidth = 0.1)
+summarise(evals, av_score = mean(score), min_score = min(score), max_score = max(score))
 ```
 
-*Add your narrative here.*
+The distribution of scores is definitely left skewed - we can also note that the mean score is 4.17 (3 s.f.) which is quite high - suggesting that students are scoring the courses quite generously. In addition, the fact that the minimum score rating is 2.3 is further evidence for this/
 
 ### Exercise 2
 
